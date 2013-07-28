@@ -1,7 +1,10 @@
-@(message: String)
+@(comps: List[Competition])
 
-@main("Welcome to Play 2.1") {
+@main("Voting App!") {
     
-    @play20.welcome(message, style = "Java")
+    <h1>Select a competition</h1>
+    @for(c <- comps){
+    	<h2><a href="@routes.Application.castVote(c.id)"> @c.name </a></h2>
+    }
     
 }

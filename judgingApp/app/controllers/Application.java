@@ -16,7 +16,8 @@ public class Application extends Controller {
 	static Form<Team> teamForm = Form.form(Team.class);
 	
     public static Result index() {
-        return ok(index.render("Your new application is ready."));
+    	List<Competition> c = Competition.findAll();
+        return ok(index.render(c));
     }
   
     /**
