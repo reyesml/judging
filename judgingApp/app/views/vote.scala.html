@@ -3,14 +3,14 @@
 @import helper._
 
 @main("Voting") {
-    <div id="outPopUp">
+    
     <h1 align="center">Cast your votes!</h1>
     
-    <div style="width:50%; margin: 0 auto;">
+    <div style="width:100%; margin: 0 auto;">
     @form(routes.Application.castVote(competition.id)){
-    	<input type="submit" name="vote" value="upvote"/>
-    	<input type="submit" name="vote" value="downvote"/>
+    	<button type="submit" name="vote" value="upvote" style="width:100%; line-height:4em; font-size:3em;">upvote!</button>
+    	<button type="submit" name="vote" value="downvote" style="width:100%; line-height:4em; font-size:3em;">downvote!</button>
     }
     </div>
-    </div>
+    
 }
