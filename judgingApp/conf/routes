@@ -13,6 +13,7 @@ GET     /comp               				controllers.Application.competitions()
 POST    /comp   		          			controllers.Application.newCompetition()
 GET		/comp/:compId						controllers.Application.viewCompetition(compId: Long)
 POST	/comp/:compId						controllers.Application.enrollTeam(compId: Long)
+POST	/comp/:compId/vote/:teamId			controllers.Application.castVote(compId: Long, teamId: Long)
 
 
 # Teams          

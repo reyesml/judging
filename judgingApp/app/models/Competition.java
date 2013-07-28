@@ -6,6 +6,9 @@ import play.db.ebean.*;
 import play.data.validation.Constraints.*;
 import javax.persistence.*;
 
+import com.avaje.ebean.*;
+import com.avaje.ebean.annotation.PrivateOwned;
+
 
 
 @Entity
@@ -16,12 +19,17 @@ public class Competition extends Model{
 	
 	public String name;
 	
-	@ManyToMany
+	//@ManyToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	public List<Team> teams = new ArrayList<Team>();
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	public List<Vote> votes = new ArrayList<Vote>();
 	
 	public Competition(String name){
 		this.name = name;
 	}
+	
 	
 	
 	//Query stuff
@@ -35,10 +43,14 @@ public class Competition extends Model{
 		//add a team to the specified competition.
 		Competition c = find.ref(competition);
 		Team t = Team.find.ref(team);
-		c.teams.add(t);
 		
+		//associations must be handled manually on a OneToMany/ManyToOne relation
+		c.teams.add(t);
+		t.competition = c;
 		System.out.println("adding team: " + t.teamName + " to competition: " + c.name);
-		c.saveManyToManyAssociations("teams");
+		t.save();
+		c.save();
+		
 		
 		
 	}

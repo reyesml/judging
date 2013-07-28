@@ -13,6 +13,7 @@ create table team (
   id                        bigint not null,
   team_name                 varchar(255),
   project                   varchar(255),
+  competition_id            bigint,
   constraint pk_team primary key (id))
 ;
 
@@ -24,36 +25,18 @@ create table vote (
   constraint pk_vote primary key (id))
 ;
 
-
-create table competition_team (
-  competition_id                 bigint not null,
-  team_id                        bigint not null,
-  constraint pk_competition_team primary key (competition_id, team_id))
-;
-
-create table team_competition (
-  team_id                        bigint not null,
-  competition_id                 bigint not null,
-  constraint pk_team_competition primary key (team_id, competition_id))
-;
 create sequence competition_seq;
 
 create sequence team_seq;
 
 create sequence vote_seq;
 
-alter table vote add constraint fk_vote_team_1 foreign key (team_id) references team (id) on delete restrict on update restrict;
-create index ix_vote_team_1 on vote (team_id);
+alter table team add constraint fk_team_competition_1 foreign key (competition_id) references competition (id) on delete restrict on update restrict;
+create index ix_team_competition_1 on team (competition_id);
+alter table vote add constraint fk_vote_team_2 foreign key (team_id) references team (id) on delete restrict on update restrict;
+create index ix_vote_team_2 on vote (team_id);
 
 
-
-alter table competition_team add constraint fk_competition_team_competiti_01 foreign key (competition_id) references competition (id) on delete restrict on update restrict;
-
-alter table competition_team add constraint fk_competition_team_team_02 foreign key (team_id) references team (id) on delete restrict on update restrict;
-
-alter table team_competition add constraint fk_team_competition_team_01 foreign key (team_id) references team (id) on delete restrict on update restrict;
-
-alter table team_competition add constraint fk_team_competition_competiti_02 foreign key (competition_id) references competition (id) on delete restrict on update restrict;
 
 # --- !Downs
 
@@ -61,11 +44,7 @@ SET REFERENTIAL_INTEGRITY FALSE;
 
 drop table if exists competition;
 
-drop table if exists competition_team;
-
 drop table if exists team;
-
-drop table if exists team_competition;
 
 drop table if exists vote;
 

@@ -62,6 +62,10 @@ public class Application extends Controller {
     	return ok(views.html.compDetails.render(c, teams));
     }
     
+    public static Result castVote(Long compId, Long teamId){
+    	return TODO;
+    }
+    
     
     /**
      * Team
@@ -82,4 +86,6 @@ public class Application extends Controller {
     		return redirect(routes.Application.teams());  
     	}
     }
+    
+    
 }

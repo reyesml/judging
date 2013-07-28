@@ -6,6 +6,9 @@ import play.db.ebean.*;
 import play.data.validation.Constraints.*;
 import javax.persistence.*;
 
+import com.avaje.ebean.*;
+import com.avaje.ebean.annotation.PrivateOwned;
+
 
 
 @Entity
@@ -21,8 +24,10 @@ public class Team extends Model{
 	@OneToMany(cascade = CascadeType.PERSIST)
 	public List<Vote> votes = new ArrayList<Vote>();
 	
-	@ManyToMany
-	public List<Competition> competition = new ArrayList<Competition>();
+	//@ManyToMany
+	//public List<Competition> competition = new ArrayList<Competition>();
+	@ManyToOne
+	public Competition competition;
 	
 	public Team(String teamName, String project){
 		this.teamName = teamName;

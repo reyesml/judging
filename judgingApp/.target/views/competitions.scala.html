@@ -1,0 +1,27 @@
+@(competitions: List[Competition], compForm: Form[Competition])
+
+@import helper._
+
+@main("Competitions") {
+    
+    <h1>@competitions.size() competitions(s)</h1>
+    
+    <ul>
+        @for(competition <- competitions) {
+            <li>
+                @competition.name
+                &nbsp; <a href="@routes.Application.viewCompetition(competition.id)" title="view competition details">Details</a>
+            </li>
+        }
+    </ul>
+    
+    <h2>View/Add competitions</h2>
+    
+    @form(routes.Application.newCompetition()) {
+        @inputText(compForm("name"))
+        
+        <input type="submit" value="Create">
+        
+    }
+    
+}

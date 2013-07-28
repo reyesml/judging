@@ -5,6 +5,8 @@ import play.db.ebean.*;
 import play.data.validation.Constraints.*;
 import javax.persistence.*;
 
+import com.avaje.ebean.*;
+
 
 
 @Entity
