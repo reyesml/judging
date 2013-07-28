@@ -21,8 +21,8 @@ public class Team extends Model{
 	@OneToMany(cascade = CascadeType.PERSIST)
 	public List<Vote> votes = new ArrayList<Vote>();
 	
-	@ManyToOne
-	public Competition competition;
+	@ManyToMany
+	public List<Competition> competition = new ArrayList<Competition>();
 	
 	public Team(String teamName, String project){
 		this.teamName = teamName;

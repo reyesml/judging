@@ -47,7 +47,19 @@ public class Application extends Controller {
     }
     
     public static Result enrollTeam(Long compId){
-    	return TODO;
+    	Competition c = Competition.find.ref(compId);
+    	DynamicForm requestData = Form.form().bindFromRequest();
+    	String teamIdString = requestData.get("teamId");
+    	
+    	Long teamId = Long.parseLong(teamIdString);
+    	//Team t = Team.find.ref(teamId);
+    	System.out.println("Team id: " + teamId);
+    	Competition.addTeam(compId, teamId);
+    	
+    	List<Team> teams = Team.findAll();
+    	
+    	System.out.println("Teams competing: " + c.teams.size());
+    	return ok(views.html.compDetails.render(c, teams));
     }
     
     

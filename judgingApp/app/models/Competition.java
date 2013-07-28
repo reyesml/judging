@@ -16,7 +16,7 @@ public class Competition extends Model{
 	
 	public String name;
 	
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany
 	public List<Team> teams = new ArrayList<Team>();
 	
 	public Competition(String name){
@@ -36,7 +36,10 @@ public class Competition extends Model{
 		Competition c = find.ref(competition);
 		Team t = Team.find.ref(team);
 		c.teams.add(t);
-		c.save();
+		
+		System.out.println("adding team: " + t.teamName + " to competition: " + c.name);
+		c.saveManyToManyAssociations("teams");
+		
 		
 	}
 	
