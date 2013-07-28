@@ -6,9 +6,11 @@
     <div id="outPopUp">
     <h1 align="center">Cast your votes!</h1>
     
+    <div style="width:50%; margin: 0 auto;">
     @form(routes.Application.castVote(competition.id)){
     	<input type="submit" name="vote" value="upvote"/>
     	<input type="submit" name="vote" value="downvote"/>
     }
+    </div>
     </div>
 }
