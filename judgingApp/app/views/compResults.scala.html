@@ -1,0 +1,32 @@
+@(competition: Competition)
+
+@import helper._
+
+@results(competition.name) {
+    
+    <div id="outPopUp">
+    <h1 align="center">@competition.name : Results</h1>
+    
+    <table>
+    	<tr>
+    		<th>Team</th>
+    		<th>upvotes</th>
+    		<th>downvotes</th>
+    		<th>total score</th>
+    	</tr>
+    	
+    	@for(team <- competition.teams){
+    		<tr>
+    			<td>@team.teamName</td>
+    			<td>@team.upvotes()</td>
+    			<td>@team.downvotes()</td>
+    			<td>@team.getScore()</td>
+    		</tr>
+    	}
+    
+    </table>
+    
+    </div>
+
+        
+}

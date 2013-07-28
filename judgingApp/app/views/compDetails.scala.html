@@ -10,10 +10,14 @@
     <ul>
         @for(team <- competition.teams) {
             <li>
-                @team.teamName
+                @team.teamName &nbsp; Voting open: @team.votingOpen &nbsp; <a href="@routes.Application.openVoting(competition.id, team.id)" title="open voting">Open Voting</a>
+                </br><a href="@routes.Application.teamInfo(team.id)" title="open voting">Score</a>
             </li>
         }
     </ul>
+    
+    </br>
+    <a href="@routes.Application.closeVoting(competition.id)" title="close all voting">Close All Voting</a>
     
     <h2>Add Team</h2>
     

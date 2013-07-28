@@ -62,8 +62,51 @@ public class Application extends Controller {
     	return ok(views.html.compDetails.render(c, teams));
     }
     
-    public static Result castVote(Long compId, Long teamId){
-    	return TODO;
+    public static Result openVoting(Long compId, Long teamId){
+    	Competition c = Competition.find.ref(compId);
+    	Team t = Team.find.ref(teamId);
+    	List<Team> teams = Team.findAll();
+    	Competition.openVoting(compId, teamId);
+    	
+    	return ok(views.html.compDetails.render(c, teams));
+    }
+    
+    public static Result closeVoting(Long compId){
+    	
+    	Competition c = Competition.find.ref(compId);
+    	List<Team> teams = Team.findAll();
+    	Competition.closeVoting(compId);
+    	return ok(views.html.compDetails.render(c, teams));
+    	
+    }
+    
+    
+    
+    public static Result castVote(Long compId){
+    	Competition c = Competition.find.ref(compId);
+    	DynamicForm requestData = Form.form().bindFromRequest();
+    	String voteResult = requestData.get("vote");
+    	if(voteResult != null){
+	    	Vote v = Vote.create(0);
+	    	if(voteResult.equalsIgnoreCase("upvote")){
+	    		v.vote = 1;
+	    	}else if(voteResult.equalsIgnoreCase("downvote")){
+	    		v.vote = -1;
+	    	}
+	    	v.save();
+	    	Competition.castVote(compId, v);
+    	}
+    	return ok(views.html.vote.render(c));	
+    }
+    
+    public static Result teamInfo(Long teamId){
+    	Team t = Team.find.ref(teamId);
+    	return ok(views.html.teamDetails.render(t));
+    }
+    
+    public static Result results(Long compId){
+    	Competition c = Competition.find.ref(compId);
+    	return ok(views.html.compResults.render(c));
     }
     
     

@@ -13,9 +13,14 @@ GET     /comp               				controllers.Application.competitions()
 POST    /comp   		          			controllers.Application.newCompetition()
 GET		/comp/:compId						controllers.Application.viewCompetition(compId: Long)
 POST	/comp/:compId						controllers.Application.enrollTeam(compId: Long)
-POST	/comp/:compId/vote/:teamId			controllers.Application.castVote(compId: Long, teamId: Long)
+GET		/comp/:compId/openVoting/:teamId	controllers.Application.openVoting(compId: Long, teamId: Long)
+GET		/comp/:compId/closeVoting			controllers.Application.closeVoting(compId: Long)
+GET		/comp/:compId/vote					controllers.Application.castVote(compId: Long)
+POST	/comp/:compId/vote					controllers.Application.castVote(compId: Long)
+GET 	/comp/:compId/results				controllers.Application.results(compId: Long)
 
 
 # Teams          
 GET     /teams               		controllers.Application.teams()
 POST    /teams   		          	controllers.Application.newTeam()
+GET		/teams/:teamId				controllers.Application.teamInfo(teamId: Long)

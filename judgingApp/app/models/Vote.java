@@ -19,6 +19,9 @@ public class Vote extends Model{
 	
 	public Date date;
 	
+	@ManyToOne
+	public Team team;
+	
 	public Vote(int vote){
 		this.date = new Date();
 		this.vote = vote;

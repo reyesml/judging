@@ -13,15 +13,16 @@ create table team (
   id                        bigint not null,
   team_name                 varchar(255),
   project                   varchar(255),
+  voting_open               boolean,
   competition_id            bigint,
   constraint pk_team primary key (id))
 ;
 
 create table vote (
   id                        bigint not null,
-  team_id                   bigint not null,
   vote                      integer,
   date                      timestamp,
+  team_id                   bigint,
   constraint pk_vote primary key (id))
 ;
 

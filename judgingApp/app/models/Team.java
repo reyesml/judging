@@ -21,8 +21,10 @@ public class Team extends Model{
 	
 	public String project;
 	
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.ALL)
 	public List<Vote> votes = new ArrayList<Vote>();
+	
+	public boolean votingOpen = false;
 	
 	//@ManyToMany
 	//public List<Competition> competition = new ArrayList<Competition>();
@@ -32,6 +34,31 @@ public class Team extends Model{
 	public Team(String teamName, String project){
 		this.teamName = teamName;
 		this.project = project;
+	}
+	
+	public int getScore(){
+		int result = 0;
+		for(Vote v : votes){
+			result += v.vote;
+		}
+		return result;
+	}
+	
+	public int upvotes(){
+		int result = 0;
+		for(Vote v : votes){
+			if(v.vote > 0) result++;
+		}
+		return result;
+		
+	}
+	
+	public int downvotes(){
+		int result = 0;
+		for(Vote v : votes){
+			if(v.vote < 0) result++;
+		}
+		return result;
 	}
 	
 	

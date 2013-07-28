@@ -1,0 +1,21 @@
+@(team: Team)
+
+@import helper._
+
+@main(team.teamName) {
+    
+    <h1>Team: @team.teamName</h1>
+    
+    <h2>Total score</h2>
+    <p>@team.getScore()</p>
+    
+    <h3>Upvotes</h3>
+    <p>@team.upvotes()</p>
+    
+    <h3>Downvotes</h3>
+    <p>@team.downvotes()</p>
+    
+    </br>
+    <a href="@routes.Application.teams()" title="View all teams">View all teams</a>
+    
+}

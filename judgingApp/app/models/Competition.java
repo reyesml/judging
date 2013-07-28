@@ -23,9 +23,6 @@ public class Competition extends Model{
 	@OneToMany(cascade = CascadeType.ALL)
 	public List<Team> teams = new ArrayList<Team>();
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	public List<Vote> votes = new ArrayList<Vote>();
-	
 	public Competition(String name){
 		this.name = name;
 	}
@@ -53,6 +50,50 @@ public class Competition extends Model{
 		
 		
 		
+	}
+	
+	public static void openVoting(Long competition, Long team){
+		Competition c = find.ref(competition);
+		//close voting for all other teams in competition
+		for(Team t : c.teams){
+			if(t.votingOpen){
+				Team tm = Team.find.ref(t.id);
+				tm.votingOpen = false;
+				tm.save();
+			}
+		}
+		//open voting for the new team
+		Team open = Team.find.ref(team);
+		open.votingOpen = true;
+		open.save();
+		
+	}
+	
+	public static void closeVoting(Long competition){
+		Competition c = find.ref(competition);
+		//close voting for all other teams in competition
+		for(Team t : c.teams){
+			if(t.votingOpen){
+				Team tm = Team.find.ref(t.id);
+				tm.votingOpen = false;
+				tm.save();
+			}
+		}
+	}
+	
+	public static void castVote(Long competition, Vote vote){
+		Competition c = find.ref(competition);
+		for(Team t : c.teams){
+			if(t.votingOpen){
+				Team tm = Team.find.ref(t.id);
+				Vote v = Vote.find.ref(vote.id);
+				v.team = tm;
+				tm.votes.add(v);
+				tm.save();
+				v.save();
+				System.out.println("Vote cast for team: " + tm.teamName + " vote value: " + v.vote);
+			}
+		}
 	}
 	
 	public static List<Team> getTeams(Long competition){
