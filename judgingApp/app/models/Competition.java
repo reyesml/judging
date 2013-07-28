@@ -37,6 +37,7 @@ public class Competition extends Model{
 		Team t = Team.find.ref(team);
 		c.teams.add(t);
 		c.save();
+		
 	}
 	
 	public static List<Team> getTeams(Long competition){

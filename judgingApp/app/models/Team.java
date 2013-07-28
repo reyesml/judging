@@ -1,6 +1,7 @@
 package models;
 
 import java.util.*;
+
 import play.db.ebean.*;
 import play.data.validation.Constraints.*;
 import javax.persistence.*;
@@ -20,6 +21,9 @@ public class Team extends Model{
 	@OneToMany(cascade = CascadeType.PERSIST)
 	public List<Vote> votes = new ArrayList<Vote>();
 	
+	@ManyToOne
+	public Competition competition;
+	
 	public Team(String teamName, String project){
 		this.teamName = teamName;
 		this.project = project;
@@ -29,6 +33,10 @@ public class Team extends Model{
 	//Query stuff
 	
     public static Model.Finder<Long,Team> find = new Model.Finder(Long.class, Team.class);
+    
+    public static List<Team> findAll() {
+        return find.all();
+    }
     
     public static void create(Team newTeam){
     	newTeam.save();

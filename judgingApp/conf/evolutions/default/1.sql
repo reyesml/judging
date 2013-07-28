@@ -11,9 +11,9 @@ create table competition (
 
 create table team (
   id                        bigint not null,
-  competition_id            bigint not null,
   team_name                 varchar(255),
   project                   varchar(255),
+  competition_id            bigint,
   constraint pk_team primary key (id))
 ;
 

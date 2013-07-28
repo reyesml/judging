@@ -9,7 +9,12 @@ GET     /                           controllers.Application.index()
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 # Competition          
-GET     /comp               		controllers.Application.competitions()
-POST    /comp   		          	controllers.Application.newCompetition()
+GET     /comp               				controllers.Application.competitions()
+POST    /comp   		          			controllers.Application.newCompetition()
+GET		/comp/:compId						controllers.Application.viewCompetition(compId: Long)
+POST	/comp/:compId						controllers.Application.enrollTeam(compId: Long)
 
 
+# Teams          
+GET     /teams               		controllers.Application.teams()
+POST    /teams   		          	controllers.Application.newTeam()

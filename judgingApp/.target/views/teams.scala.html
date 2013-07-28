@@ -1,0 +1,26 @@
+@(teams: List[Team], teamForm: Form[Team])
+
+@import helper._
+
+@main("Competitions") {
+    
+    <h1>@teams.size() Teams(s)</h1>
+    
+    <ul>
+        @for(team <- teams) {
+            <li>
+                @team.teamName
+            </li>
+        }
+    </ul>
+    
+    <h2>View/Add teams</h2>
+    
+    @form(routes.Application.newTeam()) {
+        @inputText(teamForm("teamName"))
+        
+        <input type="submit" value="Create">
+        
+    }
+    
+}

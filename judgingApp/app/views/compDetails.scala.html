@@ -1,0 +1,33 @@
+@(competition: Competition, teams: List[Team])
+
+@import helper._
+
+@main(competition.name) {
+    
+    <h1>@competition.name</h1>
+    
+    <h2>Teams Participating</h2>
+    <ul>
+        @for(team <- competition.teams) {
+            <li>
+                @team.teamName
+            </li>
+        }
+    </ul>
+    
+    <h2>Add Team</h2>
+    
+    @form(routes.Application.enrollTeam(competition.id)) {
+    	
+        <select name="teamId">
+        	<option selected value="">&nbsp;</option>
+        	@for(team <-teams){
+        		<option value="@team.id">@team.teamName</option>
+        	}
+        </select>
+        
+        <input type="submit" value="Create">
+        
+    }
+    
+}
