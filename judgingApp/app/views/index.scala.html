@@ -2,9 +2,15 @@
 
 @main("Voting App!") {
     
-    <h1>Select a competition</h1>
+    <h1>Select a competition for voting</h1>
     @for(c <- comps){
     	<h2><a href="@routes.Application.castVote(c.id)"> @c.name </a></h2>
+    }
+    
+    <br>
+    <h1>View Current Results</h1>
+    @for(c <- comps){
+    	<h2><a href="@routes.Application.results(c.id)"> @c.name </a></h2>
     }
     
 }
